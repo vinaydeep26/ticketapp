@@ -15,15 +15,9 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  
+html, body {
+  margin: 0;
 }
 
 @layer utilities {
@@ -31,3 +25,21 @@ body {
     text-wrap: balance;
   }
 }
+
+
+#move {
+  text-shadow: 3px 3px 5px #000000;
+  position:absolute;
+  -webkit-animation: backandforth 4s ease 0s;
+  -webkit-animation-iteration-count:infinite;
+  animation: backandforth 4s ease 0s;
+  animation-iteration-count:infinite;
+}
+
+@-webkit-keyframes backandforth {0%{left:0;} 50%{left:100%;} 100%{left:0;}}
+
+@keyframes backandforth {
+  0%, 100% {left: calc(50% - 35%);} /* Element starts and ends at 25% from the left side */
+  50% {left: calc(50% - 15%);} /* Element reaches 25% from the right side */
+}
+

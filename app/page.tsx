@@ -1,113 +1,97 @@
+'use client'
 import Image from "next/image";
+import TimeBox from "./TimeBox";
+import ReactDOM from "react-dom";
+import QRCode from "react-qr-code";
+
+
+import React, {  useEffect, useState } from 'react';
+
 
 export default function Home() {
+  const QRstrings = [
+    "98dsgFWffawef3aa87890123456789H2aAFWfwAFfaWf9twf3wadw3EFQEFf32e13d31234r4ADWdwafdevevcfWDFWFWFWAFAffwfWFfwW465352442r3rwafesgfarsgragrgarvfagerg45wfFWwffwfa67d90fwafWFfFWfwfawfFWA3456789",
+    "A2dwaFpfaaeZ3s6789012345678902rAFWfQAFfaWf912wfF3FWGfdfdfvdfegf4g4g4ADWdwafdevevcfWDFWFWFWAFAffwfWFfwW465352442r3rwafesgfarsgragrgarvfagerg45wfFWwffwfa67F90fwafWFfFWfwfawfFWA3456789",
+    "t2dwaFWffawef3456789012345678902fAFWfwAFfaWf912wf3wadwfEFQEFf32e13231234r4ADWdwafdevevcfWDFWFWFWAFAffwfWFfwW465352442r3rwafesgfarsgragrgarvfagerg45wfFWwffwfa67F90fwafWFfFWfwfawfFWA3456789",
+    "12dwaFWffawef34d6789012345678902fAFWfwAFfaWf912wf3wadwfEFQEFf32e13231234r4ADWdwafdevevcfWDFWFWFWAFAffwfWFfwW465352442r3rwafesgfarsgragrgarvfagerg45wfFWwffwfa67890fwafWFfFWfwfawfFWA3456789",
+    "12dwaFWffawef34567890jj345678902fAFWfwadwfawf3fgefgWFQEFfdQDDQ2d2wdq2f3f3gf  gfv3gEGEG3g3g3g3g3GGW3G3gw3g3GG3G3Gg3g3g3G3g3G3G3WAFAffwfWFfwW465352442r3rwafesgfarsgragrgarvfagerg45wfFWwffwfa67F90fwafWFfFWfwfawfFWA3456789",
+    "12dwaFWffawef3v56789012345678902fAFWfwAFfaWf912wf3wadwfEFQEFf32e13231234r4ADWdwafdevevcfWDFWFWFWAFAffwfWFfwW465352442r3rwafesgfarsgragrgarvfagerg45wfFWwffwfa67890fwafWFfFWfwfawfFWA3456789",
+    "12dwaFWffawef34567890W2345678902fAFWfwAFfaWf912wf3wadwfEFQEFf32e13231234r4ADWdwafdevevcfWDFWFWFWAFAffwfWFfwW465352442r3rwafesgfarsgragrgarvfagerg45wfFWwffwfa67890fwafWFfFWfwfawfFWA3456789",
+    "12dwaFWffawef3r56789012345678902fAFWfwAFfaWf912wf3wadwfEFQEFf32e132312geaseg4g4g4g5h6hffwfWFfwW465352442rg3g3WG3G3WG3g3gq4g5555453454345345466787879789gerg45wfFWwffwfa67890fwafWFfFWfwfawfFWA3456789",
+    "12dwaFWffawef3456789I12345678902fAFWfwAFfaWf912wf3wadwfEFQEFf32e13231234r4ADWdwafdevevcfWDFWFWFWAFAffwfWFfwW465352442r3rwafesgfarsgragrgarvfagerg45wfFWwffwfa67890fwafWFfFWfwfawfFWA3456789",
+    "12dwaFWffawef3456789012345678902fAFWfwAFfaWf912wf3wadwfEFQEFf32e13231234r4ADWdwafdevevcfWDFWFWFWAFAffwfWFfwW465352442r3rwafesgfarsgragrgar789887979889879vfagerg45wfFWwffwfa67890fwafWFfFWfwfawfFWA3456789"
+  ];
+  const [pass,setPass] = useState('')
+  const [QRvalue, setQRValue] = useState(QRstrings[0]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * QRstrings.length);
+      setQRValue(QRstrings[randomIndex]);
+    }, 3000); // Update every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup the interval on component unmount
+  }, [QRstrings]);
+
+  const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+    setPass(event.target.value);
+  };
+
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+    
+
+
+    <div className="bg-black ">
+
+
+    {pass !== 'Vinay123!' && (
+      <div className="h-screen flex items-center justify-between text-center" >
+        <input 
+          type="text" 
+          value={pass} 
+          onChange={handleChange} 
+          placeholder="password" 
+          className="items-center mx-auto focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm w-full block h-10
+          border-gray-300 border shadow-sm rounded-md mt-1 mr-0 mb-0 ml-10 mr-10"
         />
-      </div>
+        </div>
+      )}
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+    {pass === 'Vinay123!' && ( <>
+      <nav className="bg-black h-20">
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+</nav>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+<nav className="bg-black h-12">
+  <div className="mx-auto px-4 max-w-full">
+    <div className="flex justify-end items-end h-full"> {/* Updated */}
+      <div className="text-blue-400 text-xl">Close</div>
+    </div>
+  </div>
+</nav>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+  
+  <div className="bg-white mt-0 ml-4 mr-4 rounded-t-lg">
+  <div className="bg-blue-950 text-white font-semibold text-xl text-center py-2 items-center rounded-t-lg -ml-0.5 -mr-0.5">One Way Peak</div>
+  <div className="justify-center p-4 flex">
+  <QRCode value={QRvalue} size={200}/>
+  </div>
+  <TimeBox></TimeBox>
+
+  </div>
+    
+    
+    </>)}
+
+   
+  
+  
+ 
+  
+</div>
+    </>
   );
 }
