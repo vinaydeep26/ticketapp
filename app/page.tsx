@@ -61,7 +61,7 @@ export default function Home() {
       )}
 
     {pass === 'Vinay123!' && ( <>
-      <nav className="bg-black h-20">
+      <nav className="bg-black h-6">
 
 </nav>
 
